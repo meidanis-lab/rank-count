@@ -58,6 +58,8 @@ computeNumScenarios = function(maxK = 10, logSpace = TRUE) {
   Mat
 }
 
+### Converts two signed multi-chromosomal genomes, one represented by a list of signed integers (gene numbers),
+### and the other one (baseline genome), by a list of chromosome lengths, into an adjacency graph igraph object.
 signedPermToAdjGraph = function(signedGenome, originalChrLengths) {
   fullSignedGenome = unlist(signedGenome)
   n = length(fullSignedGenome)
@@ -93,6 +95,7 @@ signedPermToAdjGraph = function(signedGenome, originalChrLengths) {
   G
 }
 
+### Converts an adjacency graph (igraph object with all degrees 1 or 2) into a list of its cycle and path lengths
 adjGraphToCompLengths = function(G) {
   CL = clusters(G)
   allPathLengths = c()
@@ -112,6 +115,8 @@ adjGraphToCompLengths = function(G) {
   output
 }
 
+### Converts the genome pair representations in a directory into a file recording the cycle and path lengths
+### in each of their adjacency graphs; this file's format is compatible as input to the readLists() function
 convertGenomePairsToLists = function(Dir = "eut", outputFile = "eut_k_lists.txt") {
   initDir = getwd()
   setwd(Dir)
